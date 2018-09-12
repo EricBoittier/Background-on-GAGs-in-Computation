@@ -15,7 +15,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[version=3]{mhchem} % Formula subscripts using \ce{}
 \usepackage{chemnum}
-
 \usepackage{multirow}
 \usepackage{textgreek}
 \usepackage{textcomp}
@@ -101,7 +100,7 @@
 %% optional argument to \title.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[Honours]
-  {Parameterisation of ``VinaCarb" for improved docking of glycosaminoglycans \linebreak \large Research Proposal}
+  {Parameterisation of ``VinaCarb" for improved docking of heparin/heparan sulfate  \linebreak \large Research Proposal}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Some journals require a list of abbreviations or keywords to be
@@ -126,6 +125,11 @@
     long = {\small D}-galactose
 }
 
+\DeclareAcronym{DFT}{
+    short = DFT ,
+    long = density functional theory
+}
+
 \DeclareAcronym{GlcN}{
     short = Ido ,
     long = {\small D}-glucosamine
@@ -142,7 +146,7 @@
 }
 
 \DeclareAcronym{GalN}{
-    short = Ido ,
+    short = GalN ,
     long = {\small D}-galactosamine
 }
 
@@ -208,6 +212,11 @@
     long = degree of sulfation
 }
 
+\DeclareAcronym{SNFG}{
+    short = SNFG, 
+    long = structural nomenclature for glycans
+}
+
 
 \DeclareAcronym{APP}{
     short = APP,
@@ -244,8 +253,6 @@
     long = \textalpha-antithrombin III
 }
 
-
-
 \DeclareAcronym{RMSD}{
     short = RMSD,
     long = root mean square deviation
@@ -279,10 +286,7 @@
 \tableofcontents
 \newpage
 \listoffigures
-\newpage
 \listoftables
-\newpage
-
 \begin{multicols}{2}
 {\setstretch{1}
 \printacronyms[name={Abbreviations}, list-style={table}]
@@ -294,75 +298,115 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Background}
-\subsection{Glycosaminoglycans}
+
+\subsection{Heparin and heparan sulfate}
+Carbohydrates have been likened to the third molecule of life after aminoacids and nucleic acids.
+\Acp{GAG} are a family of linear oligosaccharides comprised of repeating disaccharide units whose family members, \ac{Hep}/\ac{HS} (shown in Table \ref{tab:my_label}), posses some of the highest negative charge density found in nature \cite{Gandhi2008TheProteins,Swarup2013SugarNeurons}. \Acp{GAG} are present in the extracellular matrix \ac{ECM} of all animal cells, found on the surface and in solution.
+
 \subsubsection{Structure}
-
-\Acp{GAG} are a family of linear oligosaccharides comprised of repeating disaccharide units whose family members posses some of the highest negative charge density found in nature \cite{Gandhi2008TheProteins,Swarup2013SugarNeurons}. The family of \acp{GAG} (shown in Table \ref{tab:my_label}) can be distinguished into four groups depending on their major disaccharide and the nature of their glycosidic linkages. 
-The repeating units of these glycans are composed of uronic acid residues (\ac{GlcA} or \ac{Ido}) and amino sugar residues (\ac{GalN} or \ac{GlcN}). \ac{HS} and \ac{Hep} are composed of alternating \ac{GlcN} and \ac{GlcA} or \ac{Ido}; \ac{CS} and \ac{DS} are composed of alternating \ac{GalNac} and \ac{Glc}; \ac{KS} is composed of alternating \ac{Gal} and \ac{GlcNAc}; \ac{HA} is a non-sulfated \ac{GAG}, composed of alternating \ac{GlcNAc} and \ac{GlcA} residues and is not found on \ac{PG}. All \acp{GAG} exhibit various sulfation patterns and \acf{DoS}, excluding hyaluronic acid. At physiological pH, all carboxylic acid and sulphate groups are deprotonated. Heparin has the highest negative charge density of any biomolecule. GAG sulfation patterns have been likened to the “sulfation code” as there is believed to be high specificity in relation to function.\cite{Habuchi2004SulfationCode, Gama2006SulfationActivity} The amino sugar can be sulphated at C4, C6, the unsubstituted nitrogen or C3 (rare), and the uronic acid residue can be substituted at a variety of positions – leading to \textgreater1000 possible substitution patterns for a simple octasaccharide.\cite{Gandhi2008TheProteins, SoaresdaCosta2017SulfationDisorders}
-
-% \begin{figure}
-% \captionsetup[subfigure]{labelformat=empty}
-% \begin{subfigure}{.5\textwidth}
-% \centering
-% \includegraphics[height=3cm]{Heparin.jpg}
-% \caption{\cmpd{Heparin}}
-% \end{subfigure}%
-% \begin{subfigure}{.5\textwidth}
-% \centering
-% \includegraphics[height=3cm]{Heparin.jpg}
-% \caption{Test subfigure 2}
-% \end{subfigure}%
-% \caption{Two subfigures}
-% \end{figure}
+\acp{GAG} are comprised of repeating units of uronic acid residues (\ac{GlcA} or \ac{Ido}) and amino sugar residues (\ac{GalN} or \ac{GlcN}). All \acp{GAG}, apart from \ac{HA}, exhibit various sulfation patterns and \acf{DoS}. The amino sugar can be sulphated at C4, C6, the unsubstituted nitrogen or C3 (rare), and the uronic acid residue can be substituted at a variety of positions -- leading to \textgreater1000 possible substitution patterns for a simple octasaccharide.\cite{Gandhi2008TheProteins, SoaresdaCosta2017SulfationDisorders}
+At physiological pH, all carboxylic acid and sulphate groups are deprotonated. 
+GAG sulfation patterns have been likened to the “sulfation code” as there is believed to be high specificity in relation to function.\cite{Habuchi2004SulfationCode, Gama2006SulfationActivity}
 
 \afterpage{
 \begin{table}[H]
-\begin{tabular}{m{5em}m{12em}m{5em}m{12em}} \hline \hline
-    GAG & Major repeating units & Possible Sulfation & Features \tabularnewline \hline \hline
-    Heparin (Hep) & \vspace{1mm}\includegraphics[width=5cm]{structures/Heparin.eps} {\small L}-Ido2S-\textalpha(1\textrightarrow4)-{\small D}-GlcNS \vspace{1mm} &\textbf{GlcNS:}\newline 3S, 6S & \Ac{DoS}: \tabularnewline
-    Heparan sulfate (HS) & \vspace{1mm}\includegraphics[width=5cm]{structures/Heparin.eps} {\small L}-Ido2S-\textalpha(1\textrightarrow4)-{\small D}-GlcNS \vspace{1mm}& \textbf{GlcA:}\newline 2S \newline \textbf{GlcNS:}\newline 3S, 6S &
+\begin{tabular}{p{5em}p{14em}p{17em}} \hline \hline
+    GAG & Major repeating units & Features \tabularnewline \hline \hline
+    
+    \vspace{0.25mm} Heparin (Hep) & 
+    \vspace{0.01mm}\hspace{5mm}\includegraphics[width=4cm]{structures/HepSNFG.jpg}
+    
+    \hspace{5mm}\includegraphics[width=4cm]{structures/heparin.eps}
+    
+    \hspace{-1mm}{\small L}-Ido2S-\textalpha(1\textrightarrow4)-{\small D}-GlcNS-\textalpha(1-4) \vspace{1mm} 
+    &\vspace{-1mm} \textbf{Possible sulfation:} \newline \textbf{GlcNS:} 3S, 6S. \vspace{1mm}\hline\vspace{1mm} \textbf{\Ac{DoS}:} 1.8 -- 2.6\cite{SoaresdaCosta2017SulfationDisorders}/2.7\cite{Capila2002Heparin-proteinInteractions.}
+    % \vspace{1mm}\hline\vspace{1mm} \newline
     \tabularnewline
+    
+    \hline
+    \vspace{2mm}Heparan sulfate (HS) & { \vspace{0.1mm}
+    \hspace{5mm}\includegraphics[width=4cm]{structures/HSSNFG.jpg}
+    
+    \hspace{5mm}\includegraphics[width=4cm]{structures/heparan.eps}}
+    
+    \hspace{-4mm}{\small D}-GlcA-\textalpha(1\textrightarrow4)-{\small D}-GlcNAc-\textbeta(1-4) \vspace{0mm} \newline
+    & \vspace{-0.5mm}\textbf{Possible sulfation:} \newline \vspace{0.5mm}\textbf{GlcA:} 2S, \textbf{GlcNS:} 3S, 6S.
+    \vspace{1mm}\hline\vspace{1mm}\textbf{\Ac{DoS}:} 0.8 -- 1.8\cite{SoaresdaCosta2017SulfationDisorders}
+    % \vspace{1mm}\hline\vspace{1mm} \newline
+    \tabularnewline
+    \hline
     \hline
 
-    Hyaluronic acid (HA) & \vspace{1mm}\includegraphics[width=5cm]{structures/Heparin.eps} {\small L}-Ido2S-\textalpha(1\textrightarrow4)-{\small D}-GlcNS \vspace{1mm}& &
-    \tabularnewline
-    \hline
-
-    Chondrodin sulfate (CS) & \vspace{1mm}\includegraphics[width=5cm]{structures/Heparin.eps} {\small L}-Ido2S-\textalpha(1\textrightarrow4)-{\small D}-GlcNS \vspace{1mm}& \newline \textbf{GlcNAc:}\newline4S, 6S \newline 4S6S \newline \textbf{GlcA:}\newline 2S &
-    \tabularnewline
-    Dermatin sulfate (DS) & \vspace{1mm}\includegraphics[width=5cm]{structures/Heparin.eps} {\small L}-Ido2S-\textalpha(1\textrightarrow4)-{\small D}-GlcNS \vspace{1mm}& \textbf{GlcNAc:}\newline4S &
-    \tabularnewline
-    \hline
-    
-    Keratan sulfate (CS) & \vspace{1mm}\includegraphics[width=5cm]{structures/Heparin.eps} {\small L}-Ido2S-\textalpha(1\textrightarrow4)-{\small D}-GlcNS \vspace{1mm}&
-    \textbf{Gal:}\newline6S \newline \textbf{GlcNAc:}\newline6S &
-    \tabularnewline
-    \hline
-    
 \end{tabular}
-    \caption{The structures and features of glycosaminoglycans, including reported \ac{DoS}.}
+    \caption{The structure and features of heparin and heparan sulfate, including \ac{DoS}. The \acf{SNFG}\cite{Ferguson2009EssentialsEdition} for these sugars is also presented.}
     \label{tab:my_label}
 \end{table}
+
+% \begin{figure}
+%     \begin{subfigure}[b]{0.3\textwidth}
+%         \includegraphics[width=5.5cm]{structures/examplePHIimage.jpg}
+%         \caption{phi (\textphi)}
+%     \end{subfigure}
+%     \begin{subfigure}[b]{0.3\textwidth}
+%         \includegraphics[width=5.5cm]{structures/examplePSIimage.jpg}
+%         \caption{psi (\textpsi)}
+%     \end{subfigure}
+    
+%     \caption{Example of phi (\textphi) and psi (\textpsi) dihedral angles using the crystallographic definition.}
+%     \label{fig:phipsi}
+% \end{figure}
 }
 
-\subsubsection{Function}
-
-\Acp{GAG} are present in the extracellular matrix \ac{ECM} of all animal cells, found on the surface and in solution. These sugars bind to distinct attachment receptors on proteins such as chemokines, cytokines, growth factors, morphogens, enzymes and adhesion molecules\cite{Murphy2007StructuralHeparin, Iozzo2001HeparanArena, Kreuger2006InteractionsSpecificity, Kowitsch2018MedicalReview}. \ac{HS} and \ac{Hep} are key to the regulation of Alzheimer's  \textbeta-secretase (BACE1), as they bind to BACE-1 and inhibit cleavage of \ac{APP} and aggregate into amyloid plaques.\cite{Swarup2013SugarNeurons,Scholefield2003HeparanBeta-secretase.} Other GAG chains, including CS and DS, are also found within these plaques and may contribute to plaque formation and the overall progression of the disease. Previous research also showed that HS, CS, and KS can all interact with AB peptides and enhance the shift of AB42 peptides to the \textbeta-sheet confirmation. GAGs in solution can inhibit proteins that target specific GAG sequences on the surface of PGs, for example, a heparin pentasaccharide interacts with certain binding pockets on fibroblast-growth-factor 1 and 2 (FGF, FGF1, FGF2), blocking interactions with proteins associated with proteolysis, which proliferates the FGFs, causing morphological changes to the cell\cite{SoaresdaCosta2017SulfationDisorders}. 
-
-GAG sulfation creates specific microenvironments at the ECM, which serves to direct the permeation of small cations, the proliferation of stem cells and the regulation of neuronal development in humans, amongst other processes. 
-
-\subsubsection{Protein interactions}
-Carbohydrates form hydrogen bonds with side chain residues of polar planar amino acid residues (ASN, ASP, GLY, GLN, ARG and HIS)\cite{Malik2007SequenceNetwork}.
+\subsubsection{Protein interactions and cell function}
+\acp{GAG} bind to distinct attachment receptors on proteins such as chemokines, cytokines, growth factors, morphogens, enzymes and adhesion molecules\cite{Murphy2007StructuralHeparin, Iozzo2001HeparanArena, Kreuger2006InteractionsSpecificity, Kowitsch2018MedicalReview}. Carbohydrates form hydrogen bonds with side chain residues of polar planar amino acid residues (ASN, ASP, GLY, GLN, ARG and HIS)\cite{Malik2007SequenceNetwork}.
 These hydrogen bonds can be cooperative hydrogen bonds, bidentate hydrogen bonds or hydrogen bond networks and facilitate low energy conformations of the polysaccharide.\cite{Quiocho1989Protein-carbohydrateFeatures} 
 
+\ac{HS} and other \acp{GAG} can interact with AB peptides and enhance the shift of AB42 peptides to the \textbeta-sheet confirmation.
+
+\ac{HS} and \ac{Hep} are key to the regulation of Alzheimer's  \textbeta-secretase (BACE1), as they bind to BACE-1 and inhibit cleavage of \ac{APP} and aggregate into amyloid plaques involved with the overall progression of the disease.\cite{Swarup2013SugarNeurons,Scholefield2003HeparanBeta-secretase.}
+
+GAGs in solution can inhibit proteins that target specific GAG sequences on the surface of \acp{PG}. For example, a heparin pentasaccharide interacts with certain binding pockets on \ac{FGF} blocking interactions with proteins associated with proteolysis, which proliferates the \acp{FGF}, causing morphological changes to the cell\cite{SoaresdaCosta2017SulfationDisorders}. 
+\\
+GAG sulfation creates specific microenvironments at the \ac{ECM}, which serves to direct the permeation of small cations, the proliferation of stem cells and the regulation of neuronal development in humans, amongst other processes. 
+
+\afterpage{
+
+\begin{figure}
+    \begin{subfigure}[b]{0.49\textwidth}
+        {\hspace{0cm}}\includegraphics[width=10cm]{images/1TB6.png}
+        \caption{$ $}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+        \hspace{2cm}\includegraphics[width=7cm]{images/1tb6.pdf}
+    \caption{$ $}
+    \end{subfigure}
+    
+    \caption{(a) Molecular basis of heparin antithrombin thrombin ternary complex. (b) }
+    \label{fig:thrombin}
+\end{figure}
 
 
-\subsection{Computational methods and their roles in drug discovery}
+}
+
+\pagebreak
+\subsection{Computational methods and carbohydrates}
 
 `Big O'  notation, $\mathcal{O}(f(n))$, is a concept in computer science that relates the size of a task to the time taken to complete the task using a given algorithm. A task of $\mathcal{O}(n^{2})$ implies a quadratic relationship between the size of the task and the time taken to complete it.
 
 \subsubsection{Quantum mechanics}
-\Ac{QM}
+\Ac{QM} is ...
+\Ac{QM} has the ability to give reliable results, such as energies and geometries, that can be used to give approximations using `cheaper' computational methods (such as force fields or energy functions for docking experiments). 
+
+GLYCAM06, an Amber forcefield that provides the basis of energy calculations in VinaCarb, was parameterized using the HF/6-31G* level of theory for geometry optimization and B3LYP/6-3111G(2d,2p) for single point energy calculations\cite{Kirschner2008GLYCAM06:Carbohydrates}. 
+During geometry optimization, diffuse functions were added to anionic molecules; however, this approach was not taken during the calculation of single point energies. It is likely therefore, that free energies may be underestimated for anionic compounds. Since solvation effects are key considered key to understanding the thermodynamics of carbohydrates, especially highly charged sugars such as \acp{GAG}, since the parameterization of GLYCAM06 neglected the use of appropriate implicit solvents, such as water, it would be prudent to consider this error when evaluating the accuracy of this model. 
+
+In terms of how this functional/basis set combination performs to higher levels of theory, there has been some effort made to benchmark these details when studying these molecules with \ac{DFT}. Although many examples of its use exist in the literature, B3LYP has shown to perform poorly when compared to high level \textit{ab initio} calculations, such as MP2/aug-cc-pVTZ and CCSD(T). CCSD(T) methods scale $\mathcal{O}(n^{7})$ in terms of system size, making high quality calculations of disaccharides prohibitevly expensive with current technology. 
+
+GLYCAM06 shows an unsatisfying performance in the entire energy window
+
+A bench marking study involving 
+
+M06-L performed 
 
 \subsubsection{Molecular dynamics}
 \Ac{md}
@@ -397,7 +441,7 @@ To model \ac{GAG} binding to flat surface, the available space for ligands to bi
 
 \subsection{Current challenges in glycosaminoglycan docking}
 
-
+\pagebreak
 \section{Aims}
 
 \section{Methods}
