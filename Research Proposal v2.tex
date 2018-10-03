@@ -1,0 +1,374 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This is a (brief) model paper using the achemso class
+%% The document class accepts keyval options, which should include
+%% the target journal and optionally the manuscript type.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[journal=jctcce,manuscript=article]{achemso}
+\setkeys{acs}{articletitle=false}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional packages needed here.  Only include packages
+%% which are essential, to avoid problems later. Do NOT use any
+%% packages which require e-TeX (for example etoolbox): the e-TeX
+%% extensions are not currently available on the ACS conversion
+%% servers.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[version=3]{mhchem} % Formula subscripts using \ce{}
+\usepackage{chemnum}
+\usepackage{multirow}
+\usepackage{textgreek}
+\usepackage{textcomp}
+\usepackage{setspace}
+\usepackage{afterpage}
+\usepackage{natbib}
+\usepackage[acroymn]{glossaries}
+\usepackage{tabularx} % for 'tabularx' environment
+\usepackage{array}
+
+\usepackage{acro}
+
+\acsetup{hyperref=true}
+
+\usepackage{enumitem}
+
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+% glossary
+\usepackage{hyperref}
+
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% If issues arise when submitting your manuscript, you may want to
+%% un-comment the next line.  This provides information on the
+%% version of every file you have used.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%\listfiles
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional macros here.  Please use \newcommand* where
+%% possible, and avoid layout-changing macros (which are not used
+%% when typesetting).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*\mycommand[1]{\texttt{\emph{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Meta-data block
+%% ---------------
+%% Each author should be given as a separate \author command.
+%%
+%% Corresponding authors should have an e-mail given after the author
+%% name as an \email command. Phone and fax numbers can be given
+%% using \phone and \fax, respectively; this information is optional.
+%%
+%% The affiliation of authors is given after the authors; each
+%% \affiliation command applies to all preceding authors not already
+%% assigned an affiliation.
+%%
+%% The affiliation takes an option argument for the short name.  This
+%% will typically be something like "University of Somewhere".
+%%
+%% The \altaffiliation macro should be used for new address, etc.
+%% On the other hand, \alsoaffiliation is used on a per author basis
+%% when authors are associated with multiple institutions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\author{Eric D. Boittier}
+\email{eric.boittier@uqconnect.edu.au}
+\affiliation[UQ]{The University of Queendland, St Lucia, Queensland, Australia}
+
+\author{\linebreak Supervisors: A/Professor Vito Ferro}
+\affiliation[UQ]{The University of Queendland, St Lucia, Queensland, Australia}
+
+\author{Dr Neha Gandhi}
+\affiliation[QUT]{Queensland University of Technology, Gardens Point, Queensland, Australia}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The document title should be given as usual. Some journals require
+%% a running title from the author: this should be supplied as an
+%% optional argument to \title.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[Honours]
+  {Parameterisation of ``VinaCarb" for improved docking of heparin/heparan sulfate  \linebreak \large Research Proposal}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Some journals require a list of abbreviations or keywords to be
+%% supplied. These should be set up here, and will be printed after
+%% the title and author information, if needed.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\abbreviations{IR,NMR,UV}
+\keywords{American Chemical Society}
+
+\DeclareAcronym{Ido}{
+    short = IdoA ,
+    long = {\small L}-iduronic acid
+}
+
+\DeclareAcronym{Glc}{
+    short = Glc ,
+    long = {\small D}-glucose
+}
+
+\DeclareAcronym{Gal}{
+    short = Gal ,
+    long = {\small D}-galactose
+}
+
+\DeclareAcronym{DFT}{
+    short = DFT ,
+    long = density functional theory
+}
+
+\DeclareAcronym{GlcN}{
+    short = GlcN ,
+    long = {\small D}-glucosamine
+}
+
+\DeclareAcronym{GalA}{
+    short = GalA ,
+    long = {\small D}-galacturonic acid
+}
+
+\DeclareAcronym{GlcA}{
+    short = GlcA ,
+    long = {\small D}-glucuronic acid
+}
+
+\DeclareAcronym{GalN}{
+    short = GalN ,
+    long = {\small D}-galactosamine
+}
+
+\DeclareAcronym{GlcNAc}{
+    short = GlcNAc ,
+    long = {\small D}-N-acetylglucosamine
+}
+
+\DeclareAcronym{GalNAc}{
+    short = GalNAc ,
+    long = {\small D}-N-acetylgalactosamine
+}
+
+
+
+
+\DeclareAcronym{PG}{
+    short = PG ,
+    long = proteoglycan
+}
+
+\DeclareAcronym{ECM}{
+    short = ECM ,
+    long = extracellular matrix
+}
+
+\DeclareAcronym{GAG}{
+    short = GAG ,
+    long = glycosaminoglycan
+}
+
+\DeclareAcronym{Hep}{
+    short = Hep ,
+    long = heparin
+}
+\DeclareAcronym{HS}{
+    short = HS ,
+    long = heparan sulfate
+}
+\DeclareAcronym{HA}{
+    short = HA ,
+    long = hyaluronic acid
+}
+\DeclareAcronym{CS}{
+    short = CS,
+    long = chondroitin sulfate
+}
+\DeclareAcronym{KS}{
+    short = KS,
+    long = keteran sulfate
+}
+\DeclareAcronym{DS}{
+    short = DS,
+    long = dermatin sulfate
+}
+
+
+\DeclareAcronym{DoS}{
+    short = DoS,
+    long = degree of sulfation
+}
+
+\DeclareAcronym{SNFG}{
+    short = SNFG, 
+    long = structural nomenclature for glycans
+}
+
+
+\DeclareAcronym{APP}{
+    short = APP,
+    long = amyloid precursor protein
+}
+\DeclareAcronym{Al}{
+    short = APP,
+    long = amyloid precursor protein
+}
+\DeclareAcronym{QM}{
+    short = QM,
+    long = quantum mechanics
+}
+\DeclareAcronym{MD}{
+    short = MD,
+    long = molecular dynamics
+}
+
+\DeclareAcronym{FGF1}{
+    short = FGF1,
+    long = fibroblast growth factor 1
+}
+\DeclareAcronym{FGF2}{
+    short = FGF2,
+    long = fibroblast growth factor 2
+}
+\DeclareAcronym{FGF}{
+    short = FGF,
+    long = fibroblast growth factor 
+}
+\DeclareAcronym{AT3}{
+    short = ATIII,
+    long = \textalpha-antithrombin III
+}
+
+\DeclareAcronym{RMSD}{
+    short = RMSD,
+    long = root mean square deviation
+}
+\DeclareAcronym{PRMSD}{
+    short = PRMSD,
+    long = pose root mean square deviation
+}
+
+\DeclareAcronym{RBD}{
+    short = RBD,
+    long = rigid body docking
+}
+
+\DeclareAcronym{SAR}{
+    short = SAR,
+    long = structure activity relationship
+}
+
+\newcommand{\squeezeup}{\vspace{-2.5mm}}
+
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The manuscript does not need to include \maketitle, which is
+%% executed automatically.  The document should begin with an
+%% abstract, if appropriate.  If one is given and should not be, the
+%% contents will be gobbled.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\setstretch{1.5} 
+\renewcommand{\contentsname}{Table of Contents}
+
+\renewcommand{\thesubfigure}{\Alph{subfigure}}
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+\begin{multicols}{2}
+{\setstretch{1}
+\printacronyms[name={Abbreviations}, list-style={table}]
+}
+\end{multicols}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Start the main part of the manuscript here.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+
+\section{Background}
+\subsection{Structure and function of heparin/heparin sulfate}
+
+\setlength{\textfloatsep}{0.5cm}
+\begin{figure}[!b]
+    \begin{subfigure}[b]{0.7\textwidth}
+        \includegraphics[width=10cm]{heparin_heparan.pdf}
+        \caption{}
+        \label{fig:HSHep}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.28\textwidth}
+        \includegraphics[width=4cm]{ido_confs.pdf}
+        \caption{}
+        \label{fig:IdoConfs}
+    \end{subfigure}
+    \caption{The structural and conformations diversity of heparin/heparin sulfate polymers. (A)  (B) Ring conformation equilibrium of iduronic acid.}
+\end{figure}
+
+On the surface of all eukariotic cells, highly-sulfated complex polysaccharides known as \acp{GAG} act as emissaries for the reception and modulation of a wide range of proteins, affecting normal physiological processes, such as blood coagulation and neuronal development, as well as serious pathophysiological disorders, such as cancer and Alzhiemer's disease. 
+\Ac{Hep} and \ac{HS} are members of the \ac{GAG} family and possess some of the highest negative charge density in all of nature. 
+In the clinic, \ac{Hep} is a widely used anticoagulant drug to treat patients with thrombic disorders.\cite{Liu2014ChemoenzymaticHeparin.}
+Like all \acp{GAG}, these oligosaccharides are comprised of repeating uronic acid residues (\ac{Ido} or its C5 epimer, \ac{GlcA}, which are \textalpha/\textbeta 1\textrightarrow4-linked, respectively) paired with \textalpha 1\textrightarrow4-linked \ac{GlcN} residues (Figure \ref{fig:HSHep}). 
+Each \ac{GAG} can exhibit various sulfation patterns and \ac{DoS} (the number of sulfo groups per disaccharide), which is a product of \textgreater26 proteins involved in \ac{GAG} biosynthesis in the golgi apparatus.\cite{SoaresdaCosta2017SulfationDisorders, Varki2009BiologicalGlycans} 
+While \ac{Hep} and \ac{HS} are comprised of similar disaccharide building blocks, their \ac{DoS}, saccharide make up and native location in the cell varies.
+\ac{Hep} has higher sulfation levels than HS (\ac{DoS} = 2.6 vs 0.6, respectively). 
+Upregulation of \ac{Ido} also varies. Around 9 in 10 of the disaccharide units in \ac{Hep} contain \ac{Ido}, while only 2 in 10 \ac{HS} disaccharide units contain \ac{Ido}. While \ac{HS} occurs in many cell types, heparin is isolated exclusively from mast cells.\cite{Liu2014ChemoenzymaticHeparin., Gandhi2008TheProteins}
+
+
+The structural encoding ability of \acp{GAG} rivals that of DNA, RNA and proteins.\cite{Gama2006SulfationActivity} The amino sugar can be sulphated at C4, C6, the unsubstituted nitrogen or C3 (rare), and the uronic acid residue can be substituted at a variety of positions -- leading to \textgreater1,000,000 possible substitution patterns for a \ac{GAG} octasaccharide.\cite{Gandhi2008TheProteins, SoaresdaCosta2017SulfationDisorders,Gama2006SulfationActivity} GAG sulfation patterns have been likened to the “sulfation code” and multiple \ac{SAR} studies suggest high specificity in relation to function.\cite{Habuchi2004SulfationCode, Gama2006SulfationActivity} Due to this variation, isolating defined sulfation sequences from biological sources is understandably difficult and is often \cite{Gama2006SulfationActivity}. 
+
+Although \ac{GlcA} and \ac{GlcN} remain in the standard $^{4}C_{1}$ conformation, flexible ring conformations of the other heparin components add further structural complexity to the oligosaccharide and are reasoned to have bioloigical relevance during \ac{GAG}--protein interactions.\cite{Sattelle2013DoesHeparanome} 
+The exceptional plasticity of \ac{Ido} ring conformations is unique amongst sugars, and is dependent on its position in the chain, ionic conditions and sulfation pattern.\cite{Capila2002Heparin-proteinInteractions., vanBoeckel1987ConformationalAcid}
+At the reducing end, \ac{Ido} has been characterized as existing in an equilibrium between $^{4}C_{1}$, $^{1}C_{4}$ and $^{2}S_{O}$, using $^{1}$H NMR spectroscopy (Figure \ref{fig:IdoConfs}).\cite{Ferro1986EvidenceStudies, vanBoeckel1987ConformationalAcid} 
+When \ac{Ido} is inside the chain, the equilibrium favors the $^{1}C_{4}$ and $^{2}S_{O}$ conformations exclusively, due to interactions with the 1\textrightarrow4-linked neighbouring sugar.\cite{vanBoeckel1987ConformationalAcid} 
+When \ac{Ido} is sulfated at the C2 position, the $^{2}S_{O}$ conformer may become more prominent to minimize unfavorable 1,3 diaxial interactions in the $^{1}C_{4}$ structure.\cite{Hsieh2016UncoveringSulphateb} However, the barrier for interconversion between the two conformers is low and has little effect on the overall conformation of the oligosaccharide, allowing \ac{Ido} to adopt poses suited for specific interactions between basic residues. \cite{Capila2002Heparin-proteinInteractions.} In the case of the \ac{Hep} and \ac{FGF2} complex, two \ac{Ido} residues are poised in $^{1}C_{4}$ and $^{2}S_{O}$ conformations respectively.\cite{Faham1996HeparinFactor} Ring flipping, which is believed to occur on the \textmu s timescale based on \ac{MD} simulations, has been a proposed as mechanism for selective binding/unbinding. \cite{Sattelle2012DependenceIdopyranosides} 
+
+\Ac{GalNAc}
+
+At physiological pH, all carboxylic acid and sulphate groups are deprotonated. 
+
+% PHI and PSI
+
+% Although the overall helical structure is maintained in the
+% FGF-bound HSGAG compared with unbound HSGAG, we observe
+% distinct changes in the backbone torsion angles of the oligosaccharide
+% chain induced upon protein binding. These changes result in local
+% deviations in the helical axis that provide optimal ionic and van der
+% Waals contact with the protein. A specific conformation and topological
+% arrangement of the HSGAG-binding loops of FGF, on the other
+% hand, impose structural constraints that induce the local deviations in
+% the HSGAG structure, thereby enabling maximum contact between
+% HSGAG and the protein.
+
+
+\pagebreak
+\section{Aims}
+
+\section{Methods}
+
+
+}
+\newpage
+{\setstretch{0}
+\bibliography{mendeley_v2}
+}
+\newpage
+\section{Appendix}
+\end{document}
+

@@ -314,7 +314,7 @@ GAG sulfation patterns have been likened to the “sulfation code” as there is
     GAG & Major repeating units & Features \tabularnewline \hline \hline
     
     \vspace{0.25mm} Heparin (Hep) & 
-    \vspace{0.01mm}\hspace{5mm}\includegraphics[width=4cm]{structures/HepSNFG.jpg}
+    \vspace{0.01mm}\hspace{5mm}\includegraphics[width=3.5cm]{structures/HepSNFG.jpg}
     
     \hspace{5mm}\includegraphics[width=4cm]{structures/heparin.eps}
     
@@ -325,7 +325,7 @@ GAG sulfation patterns have been likened to the “sulfation code” as there is
     
     \hline
     \vspace{2mm}Heparan sulfate (HS) & { \vspace{0.1mm}
-    \hspace{5mm}\includegraphics[width=4cm]{structures/HSSNFG.jpg}
+    \hspace{5mm}\includegraphics[width=3.5cm]{structures/HSSNFG.jpg}
     
     \hspace{5mm}\includegraphics[width=4cm]{structures/heparan.eps}}
     
@@ -338,23 +338,11 @@ GAG sulfation patterns have been likened to the “sulfation code” as there is
     \hline
 
 \end{tabular}
-    \caption{The structure and features of heparin and heparan sulfate, including \ac{DoS}. The \acf{SNFG}\cite{Ferguson2009EssentialsEdition} for these sugars is also presented.}
-    \label{tab:my_label}
-\end{table}
 
-% \begin{figure}
-%     \begin{subfigure}[b]{0.3\textwidth}
-%         \includegraphics[width=5.5cm]{structures/examplePHIimage.jpg}
-%         \caption{phi (\textphi)}
-%     \end{subfigure}
-%     \begin{subfigure}[b]{0.3\textwidth}
-%         \includegraphics[width=5.5cm]{structures/examplePSIimage.jpg}
-%         \caption{psi (\textpsi)}
-%     \end{subfigure}
+    \caption{The structure and features of heparin and heparan sulfate, including \ac{DoS} and \acf{SNFG}\cite{Ferguson2009EssentialsEdition} representation.}
+    \label{tab:my_label}
     
-%     \caption{Example of phi (\textphi) and psi (\textpsi) dihedral angles using the crystallographic definition.}
-%     \label{fig:phipsi}
-% \end{figure}
+\end{table}
 }
 
 \subsubsection{Protein interactions and cell function}
@@ -384,8 +372,6 @@ GAG sulfation creates specific microenvironments at the \ac{ECM}, which serves t
     \caption{(a) Molecular basis of heparin antithrombin thrombin ternary complex. (b) }
     \label{fig:thrombin}
 \end{figure}
-
-
 }
 
 \pagebreak
@@ -400,7 +386,7 @@ GAG sulfation creates specific microenvironments at the \ac{ECM}, which serves t
 GLYCAM06, an Amber forcefield that provides the basis of energy calculations in VinaCarb, was parameterized using the HF/6-31G* level of theory for geometry optimization and B3LYP/6-3111G(2d,2p) for single point energy calculations\cite{Kirschner2008GLYCAM06:Carbohydrates}. 
 During geometry optimization, diffuse functions were added to anionic molecules; however, this approach was not taken during the calculation of single point energies. It is likely therefore, that free energies may be underestimated for anionic compounds. Since solvation effects are key considered key to understanding the thermodynamics of carbohydrates, especially highly charged sugars such as \acp{GAG}, since the parameterization of GLYCAM06 neglected the use of appropriate implicit solvents, such as water, it would be prudent to consider this error when evaluating the accuracy of this model. 
 
-In terms of how this functional/basis set combination performs to higher levels of theory, there has been some effort made to benchmark these details when studying these molecules with \ac{DFT}. Although many examples of its use exist in the literature, B3LYP has shown to perform poorly when compared to high level \textit{ab initio} calculations, such as MP2/aug-cc-pVTZ and CCSD(T). CCSD(T) methods scale $\mathcal{O}(n^{7})$ in terms of system size, making high quality calculations of disaccharides prohibitevly expensive with current technology. 
+In terms of how this functional/basis set combination performs to higher levels of theory, there has been some effort made to benchmark these details when studying these molecules with \ac{DFT}. Although many examples of its use exist in the literature, B3LYP has shown to perform poorly when compared to high level \textit{ab initio} calculations, such as MP2/aug-cc-pVTZ and CCSD(T). CCSD(T) methods scale $\mathcal{O}(n^{7})$ in terms of system size, making high quality calculations of disaccharides prohibitively expensive with current technology. 
 
 GLYCAM06 shows an unsatisfying performance in the entire energy window
 
@@ -419,14 +405,11 @@ The distribution of amino acid residues at carbohydrate binding sites suggests
 
 \subsection{Current advances in GAG/carbohydrate docking}
 
-\subsubsection{Cluspro: heparin sitemapping (2014)}
+\subsubsection{Cluspro: heparin site mapping (2014)}
 
 The Cluspro server is an online protein--protein docking package which was adapted in 2014 to include a tool used for \ac{Hep}/\ac{HS} site mapping tool.\cite{Comeau2007ClusPro:Server, Mottarella2014DockingProteins,Kozakov2017TheDocking.} 
-Cluspro performs three main computational procedures: \ac{RBD}, \ac{RMSD} clusering and refinement using an energy minimization function.\cite{Kozakov2017TheDocking.} 
+Cluspro performs three main computational procedures: \ac{RBD}, \ac{RMSD} clustering and refinement using an energy minimization function.\cite{Kozakov2017TheDocking.} 
 
-% The rigid body docking step uses PIPER16, a docking program based on the Fast Fourier Transform (FFT) correlation approach. The FFT approach, introduced by Katchalski-Katzir and co-workers17 in 1992, led to major progress in rigid body protein-protein docking. In this method, one of the proteins (which we will call the receptor) is placed at the origin of the coordinate system on a fixed grid, the second protein (which we will call the ligand) is placed on a movable grid, and the interaction energy is written in the form of a correlation function (or as a sum of a few correlation functions). The numerical efficiency of the methods stems from the fact that such energy functions can be efficiently calculated using Fast Fourier Transforms, and results in the ability of exhaustively sampling billions of the conformations of the two interacting protein, evaluating the energies at each grid point. Thus, the FFT based algorithm enables docking of proteins without any a priori information on the structure of the complex. Katchalski-Katzir et al.17 used a simple scoring function that accounted only for shape complementarity. However, subsequent methods based on the FFT correlation approach to docking introduced more complex and more accurate scoring functions that also included terms representing electrostatic interactions18,19, or both electrostatic and desolvation contributions20. A key to the success of rigid body methods is that the shape complementarity term allows for some overlaps, and hence the methods are able to tolerate moderate differences between bound and unbound (separately crystallized) structures. As will be discussed, one of the distinguishing characteristics of PIPER, the docking program used in the current version of ClusPro, is that this implementation of the FFT correlation method employs a scoring function that includes a structure-based pairwise interaction term, and the combination with the other terms in the energy function substantially increases the accuracy of docking, resulting in more near-native structures16.
-
-%The second step performed by ClusPro is clustering the retained structures using pairwise RMSD as the distance measure.37 The biophysical meaning of clustering is isolating highly populated low-energy basins of the energy landscape.38 Several studies, including ours,31 have demonstrated that clustering algorithms generally perform better for isolating near native structures as compared with selecting low-energy conformations, if used in conjunction with exhaustive energy-based sampling such as in PIPER.
 
 \subsubsection{VinaCarb (AutoDock Vina) (2016)}
 \ac{RMSD}
